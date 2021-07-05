@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, TouchableWithoutFeedback, ImageBackground } from 'react-native';
 import Bird from './components/Bird';
 import Obstacles from './components/Obstacles';
+let screenWidthGlobal = Dimensions.get("screen").width;
 export default function App() {
   const obstaclesWidth = 60;
   const obstaclesHeight = 300;
@@ -16,6 +17,7 @@ export default function App() {
   const [obstaclesNegHeightTwo, setObstaclesNegHeightTwo] = useState(- Math.random() * 200);
   const [score, setScore] = useState(0);
   const gravity = 3;
+
   let gameTimerId;
   let obstaclesTimer;
   let obstaclesTimerTwo;
@@ -116,6 +118,8 @@ const jump = () => {
   return (
     <TouchableWithoutFeedback onPress={jump}>
     <View style={styles.container}>
+      <ImageBackground source={require("./app/img/bg.png")} style={styles.background}>
+    
       <Text>{score}</Text>
       
      <Bird
@@ -139,8 +143,9 @@ const jump = () => {
           randomBottom={obstaclesNegHeightTwo}
           gap={gap}
     />
-
+    </ImageBackground>
     </View>
+    
     </TouchableWithoutFeedback>
   );
 }
@@ -152,4 +157,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  background : {
+    flex: 1,
+    alignItems: 'center', 
+    justifyContent: 'center',
+    width: screenWidthGlobal,
+  }
 });
+//
